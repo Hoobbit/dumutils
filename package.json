@@ -1,6 +1,6 @@
 {
   "name": "hbutil",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "util lib",
   "main": "index.js",
   "scripts": {

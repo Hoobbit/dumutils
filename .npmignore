@@ -4,7 +4,11 @@
 .gitignore
 .npmignore
 .npmrc
+*.spec.*
+
+tsconfig.json
 
 .github/
-.test/
-.src/
+
+test/
+src/
