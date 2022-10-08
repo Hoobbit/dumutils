@@ -1,22 +1,23 @@
 {
-  "name": "hbutil",
-  "version": "0.1.2",
+  "name": "dumutils",
+  "version": "0.1.6",
   "description": "util lib",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha --config test/runner/.mocharc.jsonc",
-    "build": "tsc"
+    "build": "rm -r dist && tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hoobbit/hbutil.git"
+    "url": "git+https://github.com/hoobbit/dumutils.git"
   },
   "author": "cs",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hoobbit/hbutil/issues"
+    "url": "https://github.com/hoobbit/dumutils/issues"
   },
-  "homepage": "https://github.com/hoobbit/hbutil#readme",
+  "homepage": "https://github.com/hoobbit/dumutils#readme",
   "dependencies": {
     "lodash.differencewith": "^4.5.0",
     "nanoid": "^3.3.4",
