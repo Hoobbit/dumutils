@@ -1,9 +1,10 @@
 {
   "name": "dumutils",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "util lib",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "keywords": ["random string", "delete file"],
   "scripts": {
     "test": "mocha --config test/runner/.mocharc.jsonc",
     "build": "rm -r dist && tsc"
@@ -27,6 +28,7 @@
     "@types/chai": "^4.3.3",
     "@types/lodash.differencewith": "^4.5.7",
     "@types/mocha": "^10.0.0",
+    "@types/node": "^18.11.3",
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
     "ts-node": "^10.9.1",
