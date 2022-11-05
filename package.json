@@ -1,10 +1,13 @@
 {
   "name": "dumutils",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "description": "util lib",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "keywords": ["random string", "delete file"],
+  "keywords": [
+    "random string",
+    "delete file"
+  ],
   "scripts": {
     "test": "mocha --config test/runner/.mocharc.jsonc",
     "build": "rm -r dist && tsc"
@@ -20,12 +23,15 @@
   },
   "homepage": "https://github.com/hoobbit/dumutils#readme",
   "dependencies": {
+    "crypto-js": "^4.1.1",
+    "jsonwebtoken": "^8.5.1",
     "lodash.differencewith": "^4.5.0",
     "nanoid": "^3.3.4",
     "velocityjs": "^2.0.6"
   },
   "devDependencies": {
     "@types/chai": "^4.3.3",
+    "@types/jsonwebtoken": "^8.5.9",
     "@types/lodash.differencewith": "^4.5.7",
     "@types/mocha": "^10.0.0",
     "@types/node": "^18.11.3",
