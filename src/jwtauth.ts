@@ -1,4 +1,4 @@
-import jwt from 'jsonwebtoken'
+import jwt, { Algorithm } from 'jsonwebtoken'
 
 export interface IUserInfo {
 	name: string
@@ -9,19 +9,28 @@ export function publishToken(
 	userInfo: IUserInfo,
 	secretOrPublicKey: string,
 	expiresIn: string, // '1h', '1d'
-	algorithm?: string
+	algorithm?: Algorithm | undefined
 ) {
 	const token = jwt.sign(
-		{
-			// exp: Math.floor(Date.now() / 1000) + 60 * 60, // min
-			data: userInfo
-		},
+		// {
+		// 	exp: Math.floor(Date.now() / 1000) + 60 * 60, // min
+		// 	data: userInfo as Object
+		// },
+		userInfo as Object,
 		secretOrPublicKey,
 		{
 			expiresIn,
 			algorithm // default: HS256
 		}
 	)
+
+	// const token = jwt.sign(
+	// 	{
+	// 		exp: Math.floor(Date.now() / 1000) + 60 * 60, // min
+	// 		data: userInfo as Object
+	// 	},
+	// 	secretOrPublicKey
+	// )
 
 	return token
 }
