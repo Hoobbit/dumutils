@@ -6,7 +6,8 @@
   "types": "dist/index.d.ts",
   "keywords": [
     "random string",
-    "delete file"
+    "arrange array",
+    "join array"
   ],
   "scripts": {
     "test": "mocha --config test/runner/.mocharc.jsonc",
