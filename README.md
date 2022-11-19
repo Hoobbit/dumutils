@@ -55,7 +55,8 @@ const results = leftJoin(
   [
     { leftField: 'id', rightField: 'id' },
     { leftField: 'date', rightField: 'date' }
-  ],
+  ],  // type IRelFields
+  true,
   ['id', 'desc']
 )
 
