@@ -1,4 +1,5 @@
 .DS_Store
+.vscode/
 
 .git
 .gitignore
@@ -12,3 +13,5 @@ tsconfig.json
 
 test/
 src/
+
+index.ts
