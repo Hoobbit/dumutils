@@ -1,6 +1,7 @@
 # dumutils
 
-my util
+some useless utils, with no\* bugs!
+\*may contain some bugs
 
 ### Arrange Array
 
