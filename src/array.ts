@@ -184,6 +184,31 @@ export function subJoin(
 	return mainRows
 }
 
+export function subJoinByRelFunc(
+	mainRows: Array<any>,
+	subRows: Array<any>,
+	relFunc: Function,
+	subItemsKey = 'children',
+	nullSafety = false
+): Array<any> {
+	for (let mainIdx in mainRows) {
+		let mainRow = mainRows[mainIdx]
+		let children = []
+		for (let subIdx in subRows) {
+			let subRow = subRows[subIdx]
+			if (relFunc(mainRow, subRow)) {
+				children.push(subRow)
+			}
+		}
+
+		if (nullSafety || (children && children.length > 0)) {
+			mainRow[subItemsKey] = children
+		}
+	}
+
+	return mainRows
+}
+
 /**
  *  change one row array to name, value Object array
  * @param arr
