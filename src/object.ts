@@ -1,3 +1,5 @@
+import camelcase from 'camelcase'
+
 export function compareObjWithKeys(
   fromObj: any,
   toObj: any,
@@ -33,6 +35,13 @@ export function hasSameProps(obj1: any, obj2: any) {
   return false
 }
 
-export function sameObj(obj1: any, obj2: any) {
-  //
+export function objectKeyToCamelCase(obj: any) {
+  let ccObj = {} as any
+
+  Object.keys(obj).forEach((key) => {
+    let camelKey = camelcase(key)
+    ccObj[camelKey] = obj[key]
+  })
+
+  return ccObj
 }
