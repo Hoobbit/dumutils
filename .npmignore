@@ -14,4 +14,7 @@ tsconfig.json
 test/
 src/
 
+dist/*.config.*
+
 index.ts
+build.ts
