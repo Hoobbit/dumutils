@@ -3,7 +3,7 @@ import camelcase from 'camelcase'
 export function compareObjWithKeys(
   fromObj: any,
   toObj: any,
-  compareProps: Array<string>
+  compareProps?: Array<string>
 ) {
   if (fromObj == undefined && toObj) {
     return false
@@ -13,7 +13,9 @@ export function compareObjWithKeys(
     return false
   }
 
-  return compareProps.every((prop) => {
+  const props = compareProps || Object.keys(fromObj)
+
+  return props.every((prop) => {
     if (fromObj[prop] && toObj[prop]) {
       return fromObj[prop].toString() === toObj[prop].toString()
     } else {
