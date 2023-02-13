@@ -64,30 +64,30 @@ describe('extendL1Test', function () {
     const toObjArray = [
       {
         matType: 'PC',
-        '2022-01-01_doneQty': 655,
         '2022-01-01_planQty': 655,
-        '2022-01-02_doneQty': 630,
+        '2022-01-01_doneQty': 655,
         '2022-01-02_planQty': 630,
-        '2022-01-03_doneQty': 275,
-        '2022-01-03_planQty': 275
+        '2022-01-02_doneQty': 630,
+        '2022-01-03_planQty': 275,
+        '2022-01-03_doneQty': 275
       },
       {
         matType: 'PHONE',
-        '2022-01-01_doneQty': 828,
         '2022-01-01_planQty': 828,
-        '2022-01-02_doneQty': 755,
+        '2022-01-01_doneQty': 828,
         '2022-01-02_planQty': 755,
-        '2022-01-03_doneQty': 725,
-        '2022-01-03_planQty': 725
+        '2022-01-02_doneQty': 755,
+        '2022-01-03_planQty': 725,
+        '2022-01-03_doneQty': 725
       },
       {
         matType: 'TABLET',
-        '2022-01-01_doneQty': 255,
         '2022-01-01_planQty': 255,
-        '2022-01-02_doneQty': 265,
+        '2022-01-01_doneQty': 255,
         '2022-01-02_planQty': 265,
-        '2022-01-03_doneQty': 275,
-        '2022-01-03_planQty': 275
+        '2022-01-02_doneQty': 265,
+        '2022-01-03_planQty': 275,
+        '2022-01-03_doneQty': 275
       }
     ]
 
