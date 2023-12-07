@@ -1,8 +1,8 @@
 import diffWith from 'lodash.differencewith'
 
 export interface IArrangedArray {
-	remove: Array<any>
-	add: Array<any>
+  remove: Array<any>
+  add: Array<any>
 }
 
 /**
@@ -13,25 +13,25 @@ export interface IArrangedArray {
  * @returns IArrangedArray
  */
 export function arrangeObjArray(
-	from: Array<any>,
-	to: Array<any>,
-	compare = defaultCompare
+  from: Array<any>,
+  to: Array<any>,
+  compare = defaultCompare
 ): IArrangedArray {
-	const remove = diffWith(from, to, compare)
-	const add = diffWith(to, from, compare)
-	return {
-		remove,
-		add
-	}
+  const remove = diffWith(from, to, compare)
+  const add = diffWith(to, from, compare)
+  return {
+    remove,
+    add
+  }
 }
 
 function defaultCompare(oldObj: any, newObj: any) {
-	return oldObj.id == newObj.id
+  return oldObj.id == newObj.id
 }
 
 export interface IRelFields {
-	leftField: string
-	rightField: string
+  leftField: string
+  rightField: string
 }
 
 /**
@@ -44,72 +44,72 @@ export interface IRelFields {
  * @returns
  */
 export function leftJoin(
-	rows1: Array<any>,
-	rows2: Array<any>,
-	rels: Array<IRelFields>,
-	fillEmptyField = true,
-	rows2Fields?: Array<string>
+  rows1: Array<any>,
+  rows2: Array<any>,
+  rels: Array<IRelFields>,
+  fillEmptyField = true,
+  rows2Fields?: Array<string>
 ): Array<any> {
-	let results = []
-	let buildRow2Fields = false
-	if (!rows2Fields) {
-		buildRow2Fields = true
-		rows2Fields = [] as string[]
-	}
+  let results = []
+  let buildRow2Fields = false
+  if (!rows2Fields) {
+    buildRow2Fields = true
+    rows2Fields = [] as string[]
+  }
 
-	for (let idx1 in rows1) {
-		let row1 = rows1[idx1]
+  for (let idx1 in rows1) {
+    let row1 = rows1[idx1]
 
-		let noHit = true
-		for (let idx2 in rows2) {
-			let hit = true
-			let row2 = rows2[idx2]
-			if (buildRow2Fields) {
-				Object.keys(row2).forEach((colKey) => {
-					if (!rows2Fields?.includes(colKey)) {
-						rows2Fields?.push(colKey)
-					}
-				})
-			}
+    let noHit = true
+    for (let idx2 in rows2) {
+      let hit = true
+      let row2 = rows2[idx2]
+      if (buildRow2Fields) {
+        Object.keys(row2).forEach((colKey) => {
+          if (!rows2Fields?.includes(colKey)) {
+            rows2Fields?.push(colKey)
+          }
+        })
+      }
 
-			for (let relIdx in rels) {
-				const rel = rels[relIdx]
-				if (row1[rel.leftField] != row2[rel.rightField]) {
-					hit = false
-					break
-				}
-			}
+      for (let relIdx in rels) {
+        const rel = rels[relIdx]
+        if (row1[rel.leftField] != row2[rel.rightField]) {
+          hit = false
+          break
+        }
+      }
 
-			if (hit) {
-				noHit = false
-				const joinRow = {
-					...row1
-				}
-				Object.keys(row2).forEach((key: string) => {
-					if (!joinRow[key]) {
-						joinRow[key] = row2[key]
-					}
-				})
+      if (hit) {
+        noHit = false
+        const joinRow = {
+          ...row1
+        }
+        Object.keys(row2).forEach((key: string) => {
+          if (!joinRow[key]) {
+            joinRow[key] = row2[key]
+          }
+        })
 
-				results.push(joinRow)
-			}
-		}
+        results.push(joinRow)
+      }
+    }
 
-		if (noHit) {
-			const joinRow = { ...row1 }
-			if (fillEmptyField) {
-				rows2Fields.forEach((field) => {
-					if (!joinRow[field]) {
-						joinRow[field] = null
-					}
-				})
-			}
+    if (noHit) {
+      const joinRow = { ...row1 }
+      if (fillEmptyField) {
+        rows2Fields.forEach((field) => {
+          if (!joinRow[field]) {
+            joinRow[field] = null
+          }
+        })
+      }
 
-			results.push(joinRow)
-		}
-	}
+      results.push(joinRow)
+    }
+  }
 
-	return results
+  return results
 }
 
 /**
@@ -120,93 +120,95 @@ export function leftJoin(
  * @returns
  */
 export function innerJoin(
-	rows1: Array<any>,
-	rows2: Array<any>,
-	rels: Array<IRelFields>
+  rows1: Array<any>,
+  rows2: Array<any>,
+  rels: Array<IRelFields>
 ): Array<any> {
-	let results = []
-	for (let idx1 in rows1) {
-		let row1 = rows1[idx1]
-		for (let idx2 in rows2) {
-			let row2 = rows2[idx2]
-			let hit = true
-			for (let relIdx in rels) {
-				const rel = rels[relIdx]
-				if (row1[rel.leftField] != row2[rel.rightField]) {
-					hit = false
-					break
-				}
-			}
+  let results = []
+  for (let idx1 in rows1) {
+    let row1 = rows1[idx1]
+    for (let idx2 in rows2) {
+      let row2 = rows2[idx2]
+      let hit = true
+      for (let relIdx in rels) {
+        const rel = rels[relIdx]
+        if (row1[rel.leftField] != row2[rel.rightField]) {
+          hit = false
+          break
+        }
+      }
 
-			if (hit) {
-				const joinRow = { ...row1 }
-				Object.keys(rows2[0]).forEach((key) => {
-					if (!joinRow[key]) {
-						joinRow[key] = row2[key]
-					}
-				})
-				results.push(joinRow)
-			}
-		}
-	}
+      if (hit) {
+        const joinRow = { ...row1 }
+        Object.keys(rows2[0]).forEach((key) => {
+          if (!joinRow[key]) {
+            joinRow[key] = row2[key]
+          }
+        })
+        results.push(joinRow)
+      }
+    }
+  }
 
-	return results
+  return results
 }
 
 export function subJoin(
-	mainRows: Array<any>,
-	subRows: Array<any>,
-	rels: Array<IRelFields>,
-	subItemsKey = 'children'
+  mainRows: Array<any>,
+  subRows: Array<any>,
+  rels: Array<IRelFields>,
+  subItemsKey = 'children'
 ): Array<any> {
-	for (let mainIdx in mainRows) {
-		let mainRow = mainRows[mainIdx]
-		let children = []
-		for (let subIdx in subRows) {
-			let subRow = subRows[subIdx]
-			let hit = true
-			for (let relIdx in rels) {
-				const rel = rels[relIdx]
-				if (mainRow[rel.leftField] != subRow[rel.rightField]) {
-					hit = false
-					break
-				}
-			}
+  for (let mainIdx in mainRows) {
+    let mainRow = mainRows[mainIdx]
+    let children = []
+    for (let subIdx in subRows) {
+      let subRow = subRows[subIdx]
+      subRow._xrr = subIdx
+      let hit = true
+      for (let relIdx in rels) {
+        const rel = rels[relIdx]
+        if (mainRow[rel.leftField] != subRow[rel.rightField]) {
+          hit = false
+          break
+        }
+      }
 
-			if (hit) {
-				children.push(subRow)
-			}
-		}
+      if (hit) {
+        children.push(subRow)
+      }
+    }
 
-		mainRow[subItemsKey] = children
-	}
+    mainRow._xrr = mainIdx
+    mainRow[subItemsKey] = children
+  }
 
-	return mainRows
+  return mainRows
 }
 
 export function subJoinByRelFunc(
-	mainRows: Array<any>,
-	subRows: Array<any>,
-	relFunc: Function,
-	subItemsKey = 'children',
-	nullSafety = false
+  mainRows: Array<any>,
+  subRows: Array<any>,
+  relFunc: Function,
+  subItemsKey = 'children',
+  nullSafety = false
 ): Array<any> {
-	for (let mainIdx in mainRows) {
-		let mainRow = mainRows[mainIdx]
-		let children = []
-		for (let subIdx in subRows) {
-			let subRow = subRows[subIdx]
-			if (relFunc(mainRow, subRow)) {
-				children.push(subRow)
-			}
-		}
+  for (let mainIdx in mainRows) {
+    let mainRow = mainRows[mainIdx]
+    let children = []
+    for (let subIdx in subRows) {
+      let subRow = subRows[subIdx]
+      if (relFunc(mainRow, subRow)) {
+        children.push(subRow)
+      }
+    }
 
-		if (nullSafety || (children && children.length > 0)) {
-			mainRow[subItemsKey] = children
-		}
-	}
+    if (nullSafety || (children && children.length > 0)) {
+      mainRow[subItemsKey] = children
+    }
+  }
 
-	return mainRows
+  return mainRows
 }
 
 /**
@@ -215,36 +217,36 @@ export function subJoinByRelFunc(
  * @returns
  */
 export function buildNameValueObjectArray(data: Array<any> | Object): any {
-	if (!data) {
-		return []
-	}
+  if (!data) {
+    return []
+  }
 
-	let nvObjArr = [] as Array<any>
-	let orgObj = {} as Object
-	if (Array.isArray(data)) {
-		if (data.length == 0) {
-			return []
-		}
+  let nvObjArr = [] as Array<any>
+  let orgObj = {} as Object
+  if (Array.isArray(data)) {
+    if (data.length == 0) {
+      return []
+    }
 
-		// just one row
-		orgObj = data[0]
-	} else {
-		orgObj = data
-	}
+    // just one row
+    orgObj = data[0]
+  } else {
+    orgObj = data
+  }
 
-	Object.keys(orgObj).forEach((key) => {
-		const nvObj = {} as any
-		nvObj['name'] = key
-		// @ts-ignore
-		nvObj['value'] = orgObj[key]
+  Object.keys(orgObj).forEach((key) => {
+    const nvObj = {} as any
+    nvObj['name'] = key
+    // @ts-ignore
+    nvObj['value'] = orgObj[key]
 
-		nvObjArr.push(nvObj)
-	})
+    nvObjArr.push(nvObj)
+  })
 
-	// // nvObj
-	// {
-	// 	name: '',
-	// 	desc: ''
-	// }
-	return nvObjArr
+  // // nvObj
+  // {
+  // 	name: '',
+  // 	desc: ''
+  // }
+  return nvObjArr
 }
