@@ -1,6 +1,6 @@
 {
   "name": "dumutils",
-  "version": "0.1.51",
+  "version": "0.1.53",
   "description": "util lib",
   "main": "dist/index.js",
   "module": "./dist/index.esm.js",
