@@ -164,7 +164,6 @@ export function subJoin(
     let children = []
     for (let subIdx in subRows) {
       let subRow = subRows[subIdx]
-      subRow._xrr = subIdx
       let hit = true
       for (let relIdx in rels) {
         const rel = rels[relIdx]
@@ -176,10 +175,11 @@ export function subJoin(
 
       if (hit) {
         children.push(subRow)
+        subRow._xrr = `${mainIdx}.${children.length}`
       }
     }
 
-    mainRow._xrr = mainIdx
+    mainRow._xrr = mainIdx + 1
     mainRow[subItemsKey] = children
   }
 
