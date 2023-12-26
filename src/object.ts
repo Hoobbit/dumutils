@@ -35,6 +35,7 @@ export function hasSameProps(obj1: any, obj2: any) {
   return false
 }
 
+/*
 export function objectKeyToCamelCase(obj: any) {
   let ccObj = {} as any
 
@@ -44,4 +45,27 @@ export function objectKeyToCamelCase(obj: any) {
   })
 
   return ccObj
+}*/
+
+export function objectKeyToCamelCase(obj: any) {
+  // 性能更好
+  let ccObj = {} as any
+
+  Object.keys(obj).forEach((key) => {
+    let camelKey = key.replace(/\_(\w)/g, (_, letter) => letter.toUpperCase())
+    ccObj[camelKey] = obj[key]
+  })
+
+  return ccObj
+}
+
+export function objectKeyToDecamelCase(obj: any) {
+  let dccObj = {} as any
+
+  Object.keys(obj).forEach((key) => {
+    let camelKey = key.replace(/([A-Z])/g, '_$1').toLowerCase()
+    dccObj[camelKey] = obj[key]
+  })
+
+  return dccObj
 }
