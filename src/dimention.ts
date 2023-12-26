@@ -22,6 +22,7 @@ export function dataColExtend(
   const newRows = [] as Array<any>
   let newRow = {} as any
   rows.forEach((r) => {
+    // 根据指定字段比较对象
     const groupBySame = compareObjWithKeys(r, newRow, groupByColProps)
     if (groupBySame) {
       if (type.toUpperCase() === 'L1') {
